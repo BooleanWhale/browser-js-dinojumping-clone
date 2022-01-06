@@ -1,5 +1,6 @@
 import { updateGround, setupGround } from './ground.js'
 import { updateChara, setupChara } from './chara.js'
+import { updateObstacle, setupObstacle } from './obstacle.js'
 
 const WORLD_WIDTH = 100
 const WORLD_HEIGHT = 30
@@ -27,6 +28,7 @@ function update(time) {
 
   updateGround(delta, speedScale)
   updateChara(delta, speedScale)
+  updateObstacle(delta, speedScale)
   updateSpeedScale(delta)
   updateScore(delta)
 
@@ -49,6 +51,7 @@ function handleStart() {
   score = 0
   setupGround()
   setupChara()
+  setupObstacle()
   startScreenElem.classList.add("hide")
   window.requestAnimationFrame(update)
 }
