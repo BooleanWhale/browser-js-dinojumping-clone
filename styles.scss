@@ -1,6 +1,4 @@
-*,
-*::before,
-*::after {
+*, *::before, *::after {
   box-sizing: border-box;
   user-select: none;
 }
@@ -55,7 +53,7 @@ body {
   bottom: calc(var(--bottom) * 1%);
 }
 
-.obstacle {
+.cactus {
   position: absolute;
   left: calc(var(--left) * 1%);
   height: 30%;
