@@ -15,6 +15,7 @@ export function setupChara() {
   isJumping = false
   charaFrame = 0
   currentFrameTime = 0
+  setCustomProperty(chara, "--bottom", 0)
   document.removeEventListener("keydown", onJump)
   document.addEventListener("keydown", onJump)
 }
