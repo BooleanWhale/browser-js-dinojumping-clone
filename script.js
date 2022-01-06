@@ -1,6 +1,6 @@
 import { updateGround, setupGround } from './ground.js'
-import { updateChara, setupChara } from './chara.js'
-import { updateObstacle, setupObstacle } from './obstacle.js'
+import { updateChara, setupChara, getCharaRect, charaLose } from './chara.js'
+import { updateObstacle, setupObstacle, getObstacleRect } from './obstacle.js'
 
 const WORLD_WIDTH = 100
 const WORLD_HEIGHT = 30
@@ -31,11 +31,25 @@ function update(time) {
   updateObstacle(delta, speedScale)
   updateSpeedScale(delta)
   updateScore(delta)
+  if (checkLose()) return handleLose()
 
   lastTime = time
   window.requestAnimationFrame(update)
 }
 
+function checkLose() {
+  const charaRect = getCharaRect()
+  return getObstacleRect().some(rect => isCollision(rect, charaRect))
+}
+
+function isCollision(rect1, rect2) {
+  return (
+    rect1.left < rect2.right &&
+    rect1.top < rect2.bottom &&
+    rect1.right > rect2.left &&
+    rect1.bottom > rect2.top
+  )
+}
 function updateSpeedScale(delta) {
   speedScale += delta * SPEED_SCALE_INCREASE
 }
@@ -54,6 +68,14 @@ function handleStart() {
   setupObstacle()
   startScreenElem.classList.add("hide")
   window.requestAnimationFrame(update)
+}
+
+function handleLose() {
+  charaLose()
+  setTimeout(() => {
+    document.addEventListener("keydown", handleStart, {once: true})
+    startScreenElem.classList.remove("hide")
+  }, 100)
 }
 
 function setPixelToWorldScale() {

@@ -9,6 +9,9 @@ let nextObstacleTime
 
 export function setupObstacle() {
   nextObstacleTime = OBSTACLE_INTERVAL_MIN
+  document.querySelectorAll("[data-obstacle]").forEach(cactus => {
+    cactus.remove()
+  })
 }
 
 export function updateObstacle(delta, speedScale) {
@@ -23,6 +26,12 @@ export function updateObstacle(delta, speedScale) {
 
   }
   nextObstacleTime -= delta
+}
+
+export function getObstacleRect() {
+  return [...document.querySelectorAll("[data-obstacle]")].map(obstacle => {
+    return obstacle.getBoundingClientRect()
+  })
 }
 
 function createObstacle() {

@@ -22,7 +22,15 @@ export function setupChara() {
 export function updateChara(delta, speedScale) {
   handleRun(delta, speedScale)
   handleJump(delta)
-} 
+}
+
+export function getCharaRect() {
+  return chara.getBoundingClientRect()
+}
+
+export function charaLose() {
+  chara.src = `imgs/chara-lose.png`
+}
  
 function handleRun(delta, speedScale) {
   if (isJumping) {
