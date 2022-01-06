@@ -1,4 +1,5 @@
 import { updateGround, setupGround } from './ground.js'
+import { updateChara, setupChara } from './chara.js'
 
 const WORLD_WIDTH = 100
 const WORLD_HEIGHT = 30
@@ -25,6 +26,7 @@ function update(time) {
   const delta = time - lastTime
 
   updateGround(delta, speedScale)
+  updateChara(delta, speedScale)
   updateSpeedScale(delta)
   updateScore(delta)
 
@@ -46,6 +48,7 @@ function handleStart() {
   speedScale = 1
   score = 0
   setupGround()
+  setupChara()
   startScreenElem.classList.add("hide")
   window.requestAnimationFrame(update)
 }
